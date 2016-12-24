@@ -3,8 +3,10 @@ package application;
 import java.util.List;
 
 import org.jgrapht.Graph;
+import org.jgrapht.GraphPath;
 import org.jgrapht.Graphs;
 import org.jgrapht.UndirectedGraph;
+import org.jgrapht.alg.DijkstraShortestPath;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 import org.jgrapht.traverse.BreadthFirstIterator;
@@ -115,7 +117,15 @@ public class Model {
 	
 	}
 	
-	
+	public List<String> getCammino(String s1, String s2){
+		DijkstraShortestPath<String, DefaultEdge> di = new DijkstraShortestPath<String, DefaultEdge>(grafo, s1, s2);
+		GraphPath <String, DefaultEdge> path= di.getPath();
+		if(path==null){
+			return null;
+		}
+		List<String> per = Graphs.getPathVertexList(path);
+		return per;
+	}
 	
 	
 	

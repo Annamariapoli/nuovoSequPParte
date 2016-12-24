@@ -1,6 +1,7 @@
 package application;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import org.jgrapht.UndirectedGraph;
@@ -73,6 +74,44 @@ public class SampleController {
 
     @FXML
     void doCerca(ActionEvent event) {
+    	txtResult.appendText("\n");
+    	String in = txtIniziale.getText();
+    	String fin =txtFinale.getText();
+    	if(in == null || fin == null){
+    		txtResult.appendText("Inserisci due parole!\n");
+    		return;
+    	}
+    	for(int i =0; i<fin.length() && i<in.length(); i++){
+    		if(!Character.isLetter(fin.charAt(i))  ||!Character.isLetter(in.charAt(i)) ){
+    			txtResult.appendText("Il formato non è corretto!\n");
+    			return;
+    		}
+    	}
+    	int lunghezza= Integer.parseInt(txtLung.getText());
+    	int l1 = in.length();
+    	int l2 = fin.length();
+    	
+    	if(l1 == l2 && l2 ==lunghezza){
+    		if(model.isPres(in) && model.isPres(fin)){
+    			List<String> percorso = model.getCammino(in, fin);
+    			if(percorso.isEmpty()){
+    				txtResult.appendText("Il cammino non esiste!\n");
+    				return;
+    				
+    			} else {
+    				txtResult.appendText("il cammino è : "+percorso.toString());
+    			}
+    	    	
+        	  }
+    		    else {
+        		txtResult.appendText("Una delle due parole non è presente nel dizionario!\n ");
+        		return;		
+    	        }
+    	}else {
+    			txtResult.appendText("La lunghezza delle parole non è corretta!\n");
+    			return;
+    		}
+    	
 
     }
 
