@@ -1,6 +1,7 @@
 package bean;
 
 public class Parola {
+	
 	private int id;
 	private String nome;
 	public Parola(int id, String nome) {
